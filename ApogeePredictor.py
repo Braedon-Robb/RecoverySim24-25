@@ -3,13 +3,17 @@ Things to change if running a new simulation:
 - Rocket class intialization 
 - Parameters class initialization 
 '''
-
+from pathlib import Path
 import pandas as pd
 import math 
 from math import pi 
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import solve_ivp
+
+script_dir = Path(__file__).parent
+#Change the thrust file here
+file_path = script_dir / 'LC2024Files' / 'Cesaroni_8187M1545-P_ThrustMFR.csv'
 
 # Class to hold rocket properties 
 class Rocket():
@@ -162,7 +166,7 @@ def main() -> None:
     # Initializing rocket and launch parameters 
     print("Initializing parameters")
     ourRocket = Rocket(4.835, 17.625, 0.132, 0.501994898) # Using data from LC 2024
-    launchParameters = Parameters('LC2024Files/Cesaroni_8187M1545-P_ThrustMFR.csv', 295, 0.0523599)
+    launchParameters = Parameters(file_path, 295, 0.0523599)
     
     # Initializing system of ODEs to be solved by integrator 
     S0 = (launchParameters.initialDisplacement, launchParameters.initialVelocity)
