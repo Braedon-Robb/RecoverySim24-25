@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 
 def extractThrustCurve(filepath : str, skipRows : int) -> pd.DataFrame:
     """
-    Reads the motor file CSV to extract the thrust curve data 
+    Reads the motor file CSV to exatract the thrust curve data 
 
     Args:
         filepath (str): File path to the motor file CSV 
@@ -93,7 +93,7 @@ def calculateMassFlowRate(df : pd.DataFrame, Isp : float) -> pd.DataFrame:
 def main() -> None:
 
     # Variables to change for each new motor! 
-    motorFile = "Cesaroni_8187M1545-P.csv" # Path desired to motor file 
+    motorFile = "LC2024Files/Cesaroni_8187M1545-P.csv" # Path desired to motor file 
     Isp = 172.65 # [s], Specific impulse of motor 
     fuelMass = 4.835 # [kg] Fuel mass in kg , used to check MFR calculated properly 
     skipRows = 4 # Number of text rows to skip in thrust curve file 
@@ -105,7 +105,7 @@ def main() -> None:
     interpolatedDataFrame = calculateMassFlowRate(interpolatedDataFrame, Isp) # Calculating mass flow rate
 
     # Integrating MFR to ensure it is within reasonable relative error of actual fuel mass 
-    integratedMFR = integrate.trapz(interpolatedDataFrame['Mass Flow Rate (kg/s)'], interpolatedDataFrame['Time (s)'])
+    integratedMFR = integrate.trapezoid(interpolatedDataFrame['Mass Flow Rate (kg/s)'], interpolatedDataFrame['Time (s)'])
     print("Integrated MFR = ", integratedMFR)
     print("Actual fuel mass = ", fuelMass)
     relativeError = (integratedMFR - fuelMass) / fuelMass

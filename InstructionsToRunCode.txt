@@ -1,0 +1,31 @@
+Requirements:
+   Download Python 3.11.4 or later
+   make sure you have pip (should be downloaded when you download python)
+   
+Setup
+1. Create a virtual environment: * make sure you are in the RecoverySim24-25 folder
+
+python -m venv venv
+
+2. Activate it:
+
+Windows:
+venv\Scripts\activate
+Mac:
+source venv/bin/activate
+
+3. Install dependencies: * only first time
+
+pip install -r requirements.txt
+
+4. now use this line to run a file:  * the first time you run a file in the venv may take some time
+
+python3 <filename>
+ * replace <filename> with something like thrustCurve.py
+
+Tip: If that does not work try 
+
+python <filename>
+
+Every time you want to run files after dont forget to do step 2 to activate your venv.
+Then you may run files as step 4 says
